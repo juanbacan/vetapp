@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vetapp/models/opcion.dart';
 import 'package:vetapp/pages/consultar_cita_page.dart';
 import 'package:vetapp/pages/crear_cita_page.dart';
+import 'package:vetapp/pages/escanear_qr_page.dart';
 import 'package:vetapp/utils/my_colors.dart';
 
 final List<Opcion> opciones = [
@@ -9,7 +10,7 @@ final List<Opcion> opciones = [
   Opcion("Citas de Hoy", "Consultar citas de hoy", "numerico.png", (context) => const ConsultarCitaPage()),
   Opcion("Agregar Vacunas", "Agrega vacunas", "verbal.png", (context) => const CrearCitaPage()),
   Opcion("Clientes", "Consultar cliente", "abstracto.png", (context) => const CrearCitaPage()),
-  Opcion("Escanear QR", "Escanea QR", "abstracto.png", (context) => const CrearCitaPage()),
+  Opcion("Escanear QR", "Escanea QR", "abstracto.png", (context) => const EscanearQR()),
 ];
 
 class AdministradorPage extends StatelessWidget {
@@ -42,7 +43,6 @@ class AdministradorPage extends StatelessWidget {
                   padding: const EdgeInsets.all(10.0),
                   child: InkWell(
                     onTap: (){
-                      //Navigator.push(context, MaterialPageRoute(builder: (context) => ContraRelojPage(materia: tarjeta)));
                       Navigator.push(
                         context, MaterialPageRoute(builder: opcion.route)
                       );

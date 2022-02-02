@@ -96,7 +96,7 @@ class __FormState extends State<_Form> {
   int selectedDate = 0;
   int selectedTime = 0;
 
-  final _firebaseService = FirebaseService();
+  final _firebaseService = FirebaseService.fb;
   
   @override
   Widget build(BuildContext context) {
@@ -154,13 +154,15 @@ class __FormState extends State<_Form> {
                   fecha,
                   hora,
                   () async {
+
                     Cita citaSave = Cita(
-                      emailCtlr.text.trim(),
-                      nameCtlr.text.trim(),
-                      "${fecha.month},${fecha.day}",
-                      "${hora.hour},${hora.minutes}",
-                      false
+                      correo: emailCtlr.text.trim(), 
+                      nombre: emailCtlr.text.trim(), 
+                      dia: "${fecha.month},${fecha.day}", 
+                      hora: "${hora.hour},${hora.minutes}", 
+                      completado: false
                     );
+
                     String cita = await _firebaseService.addCita(citaSave);
 
                     if(cita != "Error"){
