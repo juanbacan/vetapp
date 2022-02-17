@@ -1,5 +1,6 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:vetapp/models/admin_model.dart';
 import 'package:vetapp/models/cita_model.dart';
 
 class FirebaseService {
@@ -8,6 +9,7 @@ class FirebaseService {
   FirebaseService._();
 
   static CollectionReference<Cita>? _citas;
+  static CollectionReference<Admin>? _admins;
 
   CollectionReference<Cita> get citas {
     if ( _citas != null ) return _citas!;
@@ -17,6 +19,26 @@ class FirebaseService {
       toFirestore: (cita, _) => cita.toJson(),
     );
     return _citas!;
+  }
+
+  CollectionReference<Admin> get admins {
+    if ( _admins != null ) return _admins!;
+
+    _admins = FirebaseFirestore.instance.collection('admins').withConverter<Admin>(
+      fromFirestore: (snapshot, _) => Admin.fromJson(snapshot.data()!), 
+      toFirestore: (admin, _) => admin.toJson(),
+    );
+    return _admins!;
+  }
+
+  Future <bool> getAdmin(String userId) async{
+    try {
+      DocumentSnapshot<Admin> usuarioAdmin = await admins.doc(userId).get();
+      if (usuarioAdmin.exists) return(true);
+      return false;
+    } catch (e) { 
+      return false;
+    }
   }
 
   Future <String> addCita(Cita citaSave) async{

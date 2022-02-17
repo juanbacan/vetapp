@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:vetapp/models/usuario.dart';
+import 'package:vetapp/services/firebase.dart';
 
 class AuthService with ChangeNotifier {
 
@@ -12,11 +13,27 @@ class AuthService with ChangeNotifier {
   Usuario? get usuario => _usuario;
   // *************************************************
 
+  // Almacena la información adicinal del usuario
+  bool _admin = false;
+  bool get admin => this._admin;
+  // *************************************************
+
+  void checkIsAdmin()async{
+    final _firebaseService = FirebaseService.fb;
+    _admin = await _firebaseService.getAdmin(_firebaseAuth.currentUser!.uid);
+    print("aaaaaaaaaaaaaaaaaaaaa");
+    print(_admin);
+    print("aaaaaaaaaaaaaaaaaaaaa");
+  }
+
   Usuario? _userFromFirebase(auth.User? usuario){
     if(usuario == null){
       _usuario = null;
       return null;
     }
+
+    checkIsAdmin();
+
     _usuario = Usuario(id: usuario.uid, displayName: usuario.displayName, email: usuario.email, photoUrl: usuario.photoURL);
     return Usuario(id: usuario.uid, displayName: usuario.displayName, email: usuario.email, photoUrl: usuario.photoURL);
   } 

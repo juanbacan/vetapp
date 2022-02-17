@@ -3,8 +3,16 @@ import 'package:provider/provider.dart';
 import 'package:vetapp/pages/administrador_page.dart';
 import 'package:vetapp/services/auth_service.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+
+  bool notIsAdmin = false;
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +31,17 @@ class HomePage extends StatelessWidget {
             children: [
               InkWell(
                 onTap: (){
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const AdministradorPage()),
-                  );
+
+                  if(_authService.admin){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const AdministradorPage()),
+                    );
+                  }else{
+                    setState(() {
+                      notIsAdmin = true;
+                    });
+                  }
                 },
                 child: Column(
                   children: 
@@ -52,6 +67,11 @@ class HomePage extends StatelessWidget {
                     ]
                 ),
               ),
+              (notIsAdmin) ? 
+                const Text("No es un usario Administrador")
+              
+              : const SizedBox.shrink(), 
+
               const SizedBox(height: 50),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
