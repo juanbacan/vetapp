@@ -10,10 +10,10 @@ final List<Opcion> opciones = [
       (context) => const CrearCitaPage()),
   Opcion("Citas de Hoy", "Consultar citas de hoy", "citash.png",
       (context) => const ConsultarCitaPage()),
-  Opcion("Agregar Vacunas", "Agrega vacunas", "vacuna.png",
-      (context) => const CrearCitaPage()),
   Opcion(
       "Escanear QR", "Escanea QR", "qr.png", (context) => const EscanearQR()),
+  Opcion("Agregar Mascota", "Agregar Mascota", "qr.png",
+      (context) => const EscanearQR()),
 ];
 
 class AdministradorPage extends StatelessWidget {

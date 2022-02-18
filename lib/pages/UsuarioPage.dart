@@ -7,9 +7,7 @@ import 'package:vetapp/utils/my_colors.dart';
 final List<Opcion> opciones = [
   Opcion("Crear Cita", "Consulta Citas", "agendar.png",
       (context) => const CrearCitaPage()),
-  Opcion("Citas de Hoy", "Consultar citas de hoy", "citash.png",
-      (context) => const ConsultarCitaPage()),
-  Opcion("Agregar Vacunas", "Agrega vacunas", "carnet.png",
+  Opcion("Agregar Vacunas", "Vacunas", "carnet.png",
       (context) => const CrearCitaPage()),
 ];
 
