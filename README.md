@@ -1,6 +1,6 @@
 # vetapp
 
-A new Flutter project.
+Una aplicación para agendar citas al veterinario de mascotas. También permite tener un registro de mascotas.
 
 ## Getting Started
 
